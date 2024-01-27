@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tic-Tac</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <h1>Tic Tac</h1>
+    <table>
+      {% for row in board %}
+      <tr>
+        {% for cell in row %}
+        <td>{{ cell.value }}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+    <script>
+      var cells = document.getElementsByTagName('td');
+      for (var i = 0; i < cells.length; i++) {
+        cells[i].addEventListener('click', function() {
+          var row = this.parentNode.rowIndex;
+          var col = this.cellIndex;
+          var xhhtp = new XMLHttpRequest();
+          xhhtp.open("GET", `/cell-clicked/${row}/${col}/`, true);
+          xhhtp.send();
+          xhhtp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+              alert(this.responseText);
+              window.location.reload();
+            }
+          };
+        });
+      }
+    </script>
+    <!-- <div class=parent>
+      <div id="game-board">
+        Tic-tac-toe grid will be here
+      </div>
+    </div> -->
+  </body>
+</html>

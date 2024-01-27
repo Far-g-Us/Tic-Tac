@@ -1,0 +1,17 @@
+[project]
+# Support Python 3.10+.
+requires-python = ">=3.10"
+
+[tool.ruff]
+# Максимальная длина строки 79 символов.
+line-length = 79
+show-fixes = true
+src = ["src"]
+
+[tool.ruff.lint]
+# Правила: https://docs.astral.sh/ruff/rules/
+select = ["E", "F", "UP", "D", "B", "SIM"]
+ignore = ["D100", "D103", "D104"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
